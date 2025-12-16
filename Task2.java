@@ -13,7 +13,7 @@ public class Task2 {
             System.out.println();
         }
 
-        for (int i = 1; i <= rows; i++) {
+        for (int i = 1; i <= rows; i++) { 
             for (int j = rows - i; j > 0; j--) {
                 System.out.print(" ");
             }
