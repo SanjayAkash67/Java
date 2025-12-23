@@ -21,5 +21,9 @@ public class task3 {
         String str2="Welcome";
         char result2=str2.charAt(3);
         System.out.println(result2);
+
+        String str3="Hello";
+        int result3=str3.indexOf('e');  
+        System.out.println(result3);
     }
 }
