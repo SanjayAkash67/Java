@@ -4,40 +4,31 @@ public class Puzzle2 {
 	
 	
 	
-	boolean verticalSearch(String find,char[][] arr,int i,int j,int n,int start1,int end1,int start2,int end2,String emp,int charInd) {
-		start1=0;
-		start2=0;
-		end1=0;
-		end2=0;
-		emp="";
-		charInd=0;
-		if( find.charAt(charInd)==arr[i][j] ) {
-			start1=i;
-			end1=j;
-			emp+=find.charAt(charInd);//l
+	boolean verticalSearch(String find, char[][] arr, int i, int j, int n, int[] start, int[] end) {
+		StringBuilder emp = new StringBuilder();
+		int charInd = 0;
+		if (find.charAt(charInd) == arr[i][j]) {
+			start[0] = i;
+			start[1] = j;
+			emp.append(find.charAt(charInd));
 			charInd++;
-			for(int k=i+1;k<n;k++) {
-				
-				if(charInd==find.length() || find.charAt(charInd)!=arr[k][j]) {
+			int k;
+			for (k = i + 1; k < n && charInd < find.length(); k++) {
+				if (find.charAt(charInd) != arr[k][j]) {
 					break;
 				}
-				emp+=find.charAt(charInd);//ime
+				emp.append(find.charAt(charInd));
 				charInd++;
-				start2=k;
-				end2=j;
 			}
-			if(emp.equals(find)) {
-				
-				break;
+			if (emp.toString().equals(find)) {
+				end[0] = k - 1;
+				end[1] = j;
+				return true;
 			}
-			
 		}
+		return false;
 	}
-	
-	
-	void verticalReverse() {
-		
-	}
+
 	
 
 	public static void main(String[] args) {
@@ -54,30 +45,25 @@ public class Puzzle2 {
 		String find = in.nextLine();//lime
 		
 		
-		int start1=0,start2=0,end1=0,end2=0;
-		
-		
-		int charInd = 0;
-		String emp="";
-		TwoDFind fi = new TwoDFind();
-		
-		
-		for(int i=0;i<n;i++) {
-			for(int j=0;j<n;j++) {
-				
-				boolean isTrue= fi.verticalSearch(find,arr,i,j,n,start1,end1,start2,end2,emp,charInd) ? fi.verticalReverse();
-				
-				
-			}
-			
-			if(emp.equals(find)) {
-				return true;
-				break;
+		int[] start = new int[2];
+		int[] end = new int[2];
+		boolean found = false;
+
+		Puzzle2 puzzle = new Puzzle2();
+		for (int i = 0; i < n && !found; i++) {
+			for (int j = 0; j < n && !found; j++) {
+				if (puzzle.verticalSearch(find, arr, i, j, n, start, end)) {
+					found = true;
+				}
 			}
 		}
-		
-		System.out.println("Strating index"+start1+","+end1);
-		System.out.println("Ending index"+start2+","+end2);
+
+		if (found) {
+			System.out.println("Starting index: " + start[0] + "," + start[1]);
+			System.out.println("Ending index: " + end[0] + "," + end[1]);
+		} else {
+			System.out.println("Not found");
+		}
 		
 		
 		

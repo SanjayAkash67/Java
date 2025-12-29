@@ -25,5 +25,9 @@ public class task3 {
         String str3="Hello";
         int result3=str3.indexOf('e');  
         System.out.println(result3);
+
+
+
+        
     }
 }
